@@ -1,0 +1,40 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:AvaloniaMasterDetail.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="AvaloniaMasterDetail.Views.MainView"
+             x:DataType="vm:MainViewModel">
+  <Design.DataContext>
+    <!-- This only sets the DataContext for the previewer in an IDE,
+         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+    <vm:MainViewModel />
+  </Design.DataContext>
+  <Grid Margin="5">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="3*"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="2*"/>
+    </Grid.RowDefinitions>
+    <DataGrid Grid.Row="0" 
+              BorderThickness="1" 
+              BorderBrush="Gray" 
+              ItemsSource="{Binding MasterRows}"
+              SelectedItem="{Binding SelectedItem}"
+              AutoGenerateColumns="True">
+      <DataGrid.RowDetailsTemplate>
+        <DataTemplate DataType="vm:DetailRow" >
+          
+        </DataTemplate>
+      </DataGrid.RowDetailsTemplate>
+    </DataGrid>
+    <GridSplitter Grid.Row="1" Margin="5" ResizeDirection="Rows"/>
+    <DataGrid Grid.Row="2" 
+              BorderThickness="1" 
+              BorderBrush="Gray"
+              ItemsSource="{Binding SelectedItem.Children}"
+              AutoGenerateColumns="True">
+    </DataGrid>
+  </Grid>
+</UserControl>
