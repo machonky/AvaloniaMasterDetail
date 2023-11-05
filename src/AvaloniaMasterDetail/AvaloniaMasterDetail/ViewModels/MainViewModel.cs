@@ -47,7 +47,9 @@ public class MasterRow
 
     public string MasterName => $"Master M{rowId}";
 
-    public ObservableCollection<DetailRow> Children { get; private set; }
+    public ObservableCollection<DetailRow> Children  { get; }
+
+    public int NumberChildren => Children.Count;
 }
 
 /// <summary>
