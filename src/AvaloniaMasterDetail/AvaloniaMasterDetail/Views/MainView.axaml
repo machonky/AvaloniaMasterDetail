@@ -22,18 +22,32 @@
               BorderBrush="Gray" 
               ItemsSource="{Binding MasterRows}"
               SelectedItem="{Binding SelectedItem}"
-              AutoGenerateColumns="True">
-      <DataGrid.RowDetailsTemplate>
-        <DataTemplate DataType="vm:DetailRow" >
-          
-        </DataTemplate>
-      </DataGrid.RowDetailsTemplate>
+			  RowDetailsVisibilityMode="Visible">
+		<DataGrid.Columns>
+			<DataGridTextColumn Binding="{Binding Path=MasterName}"/>
+		</DataGrid.Columns>
+		<DataGrid.RowDetailsTemplate>
+			<DataTemplate x:DataType="vm:MasterRow">
+				<StackPanel Margin="50,0,0,0">
+					<TextBlock Text="{Binding NumberChildren}"/>
+					<ItemsControl x:Name="DetailControl"
+								  ItemsSource="{Binding Path=Children}">
+						<ItemsControl.ItemTemplate>
+							<DataTemplate>
+								<TextBlock Text="{Binding DetailName}"/>
+							</DataTemplate>
+						</ItemsControl.ItemTemplate>
+					</ItemsControl>
+				</StackPanel>
+			</DataTemplate>
+		</DataGrid.RowDetailsTemplate>
     </DataGrid>
     <GridSplitter Grid.Row="1" Margin="5" ResizeDirection="Rows"/>
     <DataGrid Grid.Row="2" 
               BorderThickness="1" 
               BorderBrush="Gray"
               ItemsSource="{Binding SelectedItem.Children}"
+			  RowDetailsVisibilityMode="VisibleWhenSelected"
               AutoGenerateColumns="True">
     </DataGrid>
   </Grid>
